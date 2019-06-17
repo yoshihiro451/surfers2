@@ -2,13 +2,36 @@
 	<div class="row">
 		<div class="col-xs-8 col-xs-offset-2">
 			<h2>スレッド一覧</h2>
-			<% @topics.each do |topic| %>
-				<p>タイトル</p>
-				<span><%= topic.title %></span>
-				<p>コメント</p>
-				<span><%= topic.comment %></span>
-			<% end %>
+			<table class="table table-hover">
+				<%#= @topic.user.name %>
+				<% @topics.each do |topic| %>
+				<thead>
+					<tr>
+						<th>名前</th>
+						<th>投稿日</th>
+						<th>タイトル</th>
+						<th>コメント</th>
+						<th>性別</th>
+						<th>スタイル</th>
+						<th>地域</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= link_to topic.user.name, user_path(topic.user.id) %></td>
+						<td><%= topic.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+						<td><%= topic.title %></td>
+						<td><%#= topic.comment %>
+						<%= link_to_unless_current topic.comment, topic_path(topic) %>
+						</td>
+						<td><%= topic.user.sex %></td>
+						<td><%= topic.user.style %></td>
+						<td><%= topic.area %></td>
+					</tr>
+				</tbody>
+				<% end %>
+			</table>
+			<%= paginate @topics, class: "paginate" %>
 		</div>
 	</div>
 </div>
-

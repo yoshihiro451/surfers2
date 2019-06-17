@@ -1,1 +1,9 @@
-edit.html.erb
+<h1>編集画面</h1>
+<%= form_for(@topic) do |f| %>
+    <h4>タイトル</h4>
+    <%= f.text_field :title %>
+    <h4>本文</h4>
+    <%= f.text_area :comment %>
+    <%= f.select :area, Topic.areas.keys, {}, class: "select-default" %>
+    <%= f.submit '保存' %>
+<% end %>

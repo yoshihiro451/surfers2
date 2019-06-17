@@ -1,5 +1,15 @@
 <div class="container">
 	<div class="row">
-		<h1>スレッド詳細でつ</h1>
+		<h1>スレッド詳細</h1>
+		<h3>名前</h3>
+		<%= @topic.user.name %>
+		<h3>タイトル</h3>
+		<p><%=@topic.title %></p>
+  		<h3>本文</h3>
+  		<p><%=@topic.comment %></p>
+  		<% if current_user.id == @topic.user.id %>
+  		<%= link_to "編集", edit_topic_path(@topic.id) %>
+  		<% end %>
+  		<%#= link_to "Chat", topic_chats_path %>
 	</div>
 </div>

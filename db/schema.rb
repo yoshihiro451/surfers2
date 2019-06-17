@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_122312) do
+ActiveRecord::Schema.define(version: 2019_06_13_082828) do
 
   create_table "chats", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -27,12 +27,20 @@ ActiveRecord::Schema.define(version: 2019_06_11_122312) do
     t.string "title"
   end
 
+  create_table "inquiries", force: :cascade do |t|
+    t.string "name"
+    t.string "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "topics", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "title"
     t.text "comment"
+    t.integer "area"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_06_11_122312) do
     t.string "name"
     t.string "image"
     t.string "admin"
+    t.integer "sex"
+    t.integer "style"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

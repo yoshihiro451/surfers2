@@ -24,11 +24,12 @@
           <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
         </div>
         <div class="actions">
+          <%= f.select :style, User.styles.keys, {}, class: "select-default" %>
+          <%= f.select :sex, User.sexes.keys, {}, class: "select-default" %>
           <%= f.submit "Sign up" %>
         </div>
         <%= render "devise/shared/links" %>
       </div>
     </div>
-
   </div>
 <% end %>
