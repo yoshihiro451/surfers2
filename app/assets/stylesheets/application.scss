@@ -14,7 +14,7 @@
  *= require_self
  */
  @import "bootstrap-sprockets";
-    @import "bootstrap";
+ @import "bootstrap";
 * {
 	margin: 0;
 	padding: 0;
@@ -29,14 +29,21 @@ header{
 .navbar{
 	margin: 0 auto;
 }
-.main{
-	background-image: url("tubu.jpg");
-	background-position: left top;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-}
-.body{
+/*.main{
+	height: 100%;
+	background-size: cover;
+	background: rgba(255,255,255,0.5) no-repeat center center fixed;
+}*/
+body{
     height: 100%;
 	background-size: cover;
-	background: rgba(255,255,255,0.5);
+	background: rgba(255,255,255,0.5) no-repeat center center fixed;
+}
+.page-header {
+    border-bottom: 0px solid #eeeeee;
+}
+html{
+	background: url("tubu.jpg") no-repeat center center fixed;
+	background-size: cover;
+	height: 100%;
 }

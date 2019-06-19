@@ -11,6 +11,9 @@
 				<%= f.select :area, Topic.areas.keys, {}, class: "select-default" %>
 				<%= f.submit "投稿" %>
 			<% end %>
+			<div class="pull-right">
+	        <%= link_to '戻る', :back %>
+	    	</div>
 		</div>
 	</div>
 </div>

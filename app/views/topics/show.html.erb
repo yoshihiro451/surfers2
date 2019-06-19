@@ -1,15 +1,22 @@
 <div class="container">
 	<div class="row">
-		<h1>スレッド詳細</h1>
-		<h3>名前</h3>
-		<%= @topic.user.name %>
-		<h3>タイトル</h3>
-		<p><%=@topic.title %></p>
-  		<h3>本文</h3>
-  		<p><%=@topic.comment %></p>
-  		<% if current_user.id == @topic.user.id %>
-  		<%= link_to "編集", edit_topic_path(@topic.id) %>
-  		<% end %>
+		<div class="col-xs-6 col-xs-offset-3">
+			<h1>スレッド詳細</h1>
+			<h3>名前</h3>
+			<%= @topic.user.name %>
+			<h3>タイトル</h3>
+			<p><%=@topic.title %></p>
+	  		<h3>本文</h3>
+	  		<p><%=@topic.comment %></p>
+	  		<% if current_user.id == @topic.user.id %>
+	  		<%= link_to "編集", edit_topic_path(@topic.id) %>
+  			<% end %>
+  			<div class="">
+  			</div>
+  			<div class="pull-right">
+	        <%= link_to '戻る', :back %>
+	    	</div>
   		<%#= link_to "Chat", topic_chats_path %>
+  		</div>
 	</div>
 </div>

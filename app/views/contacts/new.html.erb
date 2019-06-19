@@ -1,35 +1,42 @@
 <div class="container">
     <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
+        <div class="col-lg-8 col-lg-offset-2">
         <%= form_for(@contact) do |f| %>
-            <h3>タイトル</h3>
-            <%= f.text_field :title %>
+            <!-- <h3>タイトル</h3>
+            <%= f.text_field :title %> -->
             <h3>本文</h3>
-            <%= f.text_area :coment %>
+            <%= f.text_area :coment, :size => "100*" %>
             <%= f.submit "送信" %>
-             <table class="table table-hover">
-             	<% @contacts.each do |c| %>
+            <% if current_user %>
+             <table class="table">
              	<thead>
              		<tr>
-             			<th>名前</th>
+             			<!-- <th>名前</th> -->
 						<th>投稿日</th>
-						<th>タイトル</th>
+						<!-- <th>タイトル</th> -->
 						<th>本文</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
+					<% @contacts.each do |c| %>
 					<tr>
-						<td><%= c.user.name %></td>
+						<!-- <td><%= c.user.name %></td> -->
 						<td><%= c.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-						<td><%= c.title %></td>
+						<!-- <td><%= c.title %></td> -->
 						<td><%= c.coment %></td>
+						<td><%= link_to "詳細", contact_path(c.id) %></td>
+						<td><%= link_to '削除', contact_path(c.id), method: :delete, "data-confirm" => "削除しますか？" %></td>
 					</tr>
+					<% end %>
 				</tbody>
-				<% end %>
-        <% end %>
+    		</table>
+    		<% end %>
+    	<% end %>
         <%#= link_to "問い合わせ一覧", contact_path %>
         <% if current_user.admin %>
-	        <table class="table table-hover">
+	        <table class="table">
 	        	<% @contacts.each do |c| %>
 					<thead>
 						<tr>
@@ -49,7 +56,11 @@
 					</tbody>
 				<% end %>
 			</table>
-        <%end %>
+        <% end %>
     	</div>
     </div>
+    <div class="pull-right">
+		<%= link_to '戻る', :back %>
+	</div>
+	<%= paginate @contacts, class: "paginate" %>
 </div>

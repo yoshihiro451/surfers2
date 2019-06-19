@@ -1,1 +1,14 @@
-<h2>問い合わせ一覧</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+			<h2>問い合わせ一覧</h2>
+			<h3>名前</h3>
+			<%= @contact.user.name %>
+	  		<h3>本文</h3>
+	  		<p><%=@contact.coment %></p>
+	  		<div class="pull-right">
+	  		<%= link_to '戻る', :back %>
+	  		</div>
+		</div>
+	</div>
+</div>
