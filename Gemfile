@@ -67,3 +67,10 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'
 gem "ransack"
 gem 'kaminari','~> 1.1.1'
+# group :development do
+#   gem "letter_opener"
+# end
+gem 'kaminari-bootstrap', '~> 3.0.1'
+gem "ruby-gmail"
+gem "enum_select_rails"
+

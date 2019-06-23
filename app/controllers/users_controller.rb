@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 	def show
 		@user = User.find(params[:id])
+    @topics = Topic.where(user_id:params[:id]).page(params[:page]).reverse_order
 	end
 	def edit
 		@user = User.find(params[:id])
@@ -26,5 +27,10 @@ class UsersController < ApplicationController
       flash[:notice] = '退会しました。ご利用ありがとうございました。'
       #redirect_to root_path
     #end
+  end
+
+  private
+  def user_params
+      params.require(:user).permit(:name, :sex, :style, :email, )
   end
 end

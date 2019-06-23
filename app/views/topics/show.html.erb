@@ -3,19 +3,28 @@
 		<div class="col-xs-6 col-xs-offset-3">
 			<h1>スレッド詳細</h1>
 			<h3>名前</h3>
-			<%= @topic.user.name %>
+				<%= @topic.user.name %>
+			<h3>投稿日</h3>
+				<%= @topic.created_at.strftime('%Y/%m/%d %H:%M') %>
+			<h3>性別</h3>
+	  			<%= @topic.user.sex %>
+	  		<h3>スタイル</h3>
+	  			<%= @topic.user.style %>
+	  		<h3>地域</h3>
+	  			<%= @topic.area %>
 			<h3>タイトル</h3>
-			<p><%=@topic.title %></p>
+				<%=@topic.title %>
 	  		<h3>本文</h3>
-	  		<p><%=@topic.comment %></p>
-	  		<% if current_user.id == @topic.user.id %>
-	  		<%= link_to "編集", edit_topic_path(@topic.id) %>
-  			<% end %>
+	  		<p class="word"><%= @topic.comment %></p>
+	  		<button type="button" class="btn btn-success active"><%= link_to "参加",  topic_chats_path(@topic.id) %></button>
+	  		<%# if current_user.id == @topic.user.id %>
+	  		<%#= link_to "編集", edit_topic_path(@topic.id) %>
+  			<%# end %>
   			<div class="">
   			</div>
-  			<div class="pull-right">
+  			<!-- <div class="pull-right">
 	        <%= link_to '戻る', :back %>
-	    	</div>
+	    	</div> -->
   		<%#= link_to "Chat", topic_chats_path %>
   		</div>
 	</div>

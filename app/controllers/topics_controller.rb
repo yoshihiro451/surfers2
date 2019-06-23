@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
 	before_action :authenticate_user!, only: [:show, :new, :edit]
+	 # before_action :correct_user,   only: [:edit, :update, :destroy]
 
 	def new
 		@topic = Topic.new
@@ -31,12 +32,17 @@ class TopicsController < ApplicationController
 		 @topic = Topic.find_by_id(params[:id])
 	end
 	def ensure_correct_user
-    @topic = Topic.find_by(id:params[:id])
+    	@topic = Topic.find_by(id:params[:id])
 	    if @topic.user_id != @current_user.id
 	      flash[:notice] = "権限がありません"
 	      redirect_to("/topics/")
 	  	end
 	end
+	def destroy
+		@topic = Topic.find(params[:id])
+		@topic.destroy
+		redirect_to topics_path
+    end
 
 	private
 

@@ -22,28 +22,33 @@
 }
 header{
 	width: 100%;
-	padding: 15px 0;
-	margin: 0 auto;
-	text-align: center;
+	background-color: black;
 }
-.navbar{
+/*.navbar{
 	margin: 0 auto;
-}
+}*/
 /*.main{
 	height: 100%;
 	background-size: cover;
 	background: rgba(255,255,255,0.5) no-repeat center center fixed;
 }*/
-body{
-    height: 100%;
-	background-size: cover;
-	background: rgba(255,255,255,0.5) no-repeat center center fixed;
+body {
+	min-height: 500px;
 }
-.page-header {
-    border-bottom: 0px solid #eeeeee;
-}
-html{
+main{
+	min-height: 1000px;
 	background: url("tubu.jpg") no-repeat center center fixed;
 	background-size: cover;
-	height: 100%;
+}
+.wrap{
+	min-height: 1000px;
+	background-color: rgba(255,255,255,0.5);
+}
+/*html{
+	background: url("tubu.jpg") no-repeat center center fixed;
+	background-size: cover;
+}*/
+footer{
+	width: 100%;
+	background-color: black;
 }

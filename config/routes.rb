@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-	root to: "topics#index"
+  root to: "topics#index"
+  get 'static_page/index'
   devise_for :users
   resources :topics do
   	resources :chats

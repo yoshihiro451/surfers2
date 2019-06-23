@@ -1,12 +1,71 @@
 <div class="container">
 	<div class="row">
-		<div class="page-header">
-		  <h1>My page<br>
-		    <small><%= current_user.name %>さん、こんにちは！</small>
-		  </h1>
-		  <div class="pull-right">
-			        <%= link_to '戻る', :back %>
-			    	</div>
+		<div class="col-lg-4">
+			<h1>My page<br>
+				<h2><%= @user.name %>さん</h2>
+			</h1>
+			<% if @user.id == current_user.id %>
+			<%= form_for(@user) do |f| %>
+			<p>名前</p><%= f.text_field :name %>
+			<p>AREA</p>
+			<p>性別</p><%= f.select :sex, User.sexes.keys, {}, class: "select-default" %>
+			<p>STYLE</p><%= f.select :style, User.styles.keys, {}, class: "select-default" %>
+			<p>MAIL</p><%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+			<% end %>
+			<br>
+			<button class="btn btn-success"><%= link_to "更新", user_path, method: :patch, "data-confirm" => "更新しますか？"%></button>
+			<% else %>
+			<table class="table">
+				<tr>
+					<th>名前</th><td><%= @user.name %></td>
+				</tr>
+				<tr>
+					<th>性別</th><td><%= @user.sex %></td>
+				</tr>
+				<tr>
+					<th>スタイル</th><td><%= @user.style %></td>
+				</tr>
+			</table>
+			<% end %>
+		</div>
+		<div class="col-lg-8">
+			<h1>投稿スレッド一覧</h1>
+			<table class="table">
+			<% @topics.each do |topic| %>
+				<thead>
+					<tr>
+						<th>名前</th>
+						<th>投稿日</th>
+						<th>タイトル</th>
+						<th>コメント</th>
+						<th>性別</th>
+						<th>スタイル</th>
+						<th>地域</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= link_to topic.user.name, user_path(topic.user.id) %></td>
+						<td><%= topic.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+						<td><%= topic.title %></td>
+						<td><%#= topic.comment %>
+							<%= link_to_unless_current topic.comment.truncate(50), topic_path(topic) %>
+						</td>
+						<td><%= topic.user.sex %></td>
+						<td><%= topic.user.style %></td>
+						<td><%= topic.area %></td>
+						<!-- カレントユーザーなら記事消せる -->
+						<% if user_signed_in? && topic.user.id == current_user.id %>
+						<td><%= link_to '削除', topic_path(topic), method: :delete, "data-confirm" => "削除しますか？" %></td>
+						<td><%= link_to "編集", edit_topic_path(topic) %></td>
+						<% end %>
+					</tr>
+				</tbody>
+			<% end %>
+			</table>
+			<%= paginate @topics, class: "paginate" %>
 		</div>
 	</div>
 </div>

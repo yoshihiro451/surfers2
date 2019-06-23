@@ -14,6 +14,7 @@ class ContactsController < ApplicationController
 		@contact = Contact.new(contact_params)
 		@contact.user_id = current_user.id
 		if @contact.save
+			NotificationMailer.send_confirm_to_user(@contact).deliver_now
 			redirect_to new_contact_path
 		else
 			render :new
