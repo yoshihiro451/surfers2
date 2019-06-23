@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
 	#   @search_topics = @search.result.page(params[:page])
 	#   @topics = @search.result
 	# end
-
+	def after_sign_in_path_for(resource)
+  		topics_path
+	end
 	private
 	def after_sign_out_path_for(recouse)
 		 new_user_session_path
