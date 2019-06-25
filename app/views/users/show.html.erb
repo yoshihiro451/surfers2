@@ -1,19 +1,25 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-4">
+			<% if current_user.try(:admin?) %>
+		      <div class="page-header">
+		        <h1>管理者マイページ</h1>
+		      </div>
+		      <p class="admin_btn col-xs-offset-1 col-xs-10 col-xs-offset-1"><%= link_to "管理画面", "/admin" %></p>
+		    <% end %>
 			<h1>My page<br>
 				<h2><%= @user.name %>さん</h2>
 			</h1>
 			<% if @user.id == current_user.id %>
-			<%= form_for(@user) do |f| %>
-			<p>名前</p><%= f.text_field :name %>
-			<p>AREA</p>
-			<p>性別</p><%= f.select :sex, User.sexes.keys, {}, class: "select-default" %>
-			<p>STYLE</p><%= f.select :style, User.styles.keys, {}, class: "select-default" %>
-			<p>MAIL</p><%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-			<% end %>
-			<br>
-			<button class="btn btn-success"><%= link_to "更新", user_path, method: :patch, "data-confirm" => "更新しますか？"%></button>
+				<%= form_for(@user) do |f| %>
+				<p>名前</p><%= f.text_field :name %>
+				<p>AREA</p>
+				<p>性別</p><%= f.select :sex, User.sexes.keys, {}, class: "select-default" %>
+				<p>STYLE</p><%= f.select :style, User.styles.keys, {}, class: "select-default" %>
+				<p>MAIL</p><%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+				<%= f.submit "更新","data-confirm" => "更新しますか？"%>
+				<!-- <button class="btn btn-success" type="submit">更新</button> -->
+				<% end %>
 			<% else %>
 			<table class="table">
 				<tr>
@@ -50,9 +56,7 @@
 						<td><%= link_to topic.user.name, user_path(topic.user.id) %></td>
 						<td><%= topic.created_at.strftime('%Y/%m/%d %H:%M') %></td>
 						<td><%= topic.title %></td>
-						<td><%#= topic.comment %>
-							<%= link_to_unless_current topic.comment.truncate(50), topic_path(topic) %>
-						</td>
+						<td><%= link_to_unless_current topic.comment, topic_path(topic) %></td>
 						<td><%= topic.user.sex %></td>
 						<td><%= topic.user.style %></td>
 						<td><%= topic.area %></td>
@@ -69,3 +73,4 @@
 		</div>
 	</div>
 </div>
+

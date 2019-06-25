@@ -1,27 +1,50 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-6 col-xs-offset-3">
+		<div class="col-lg-4">
 			<h1>スレッド詳細</h1>
 			<h3>名前</h3>
-				<%= @topic.user.name %>
+				<h3><%= @topic.user.name %></h3>
 			<h3>投稿日</h3>
-				<%= @topic.created_at.strftime('%Y/%m/%d %H:%M') %>
+				<h3><%= @topic.created_at.strftime('%Y/%m/%d %H:%M') %></h3>
 			<h3>性別</h3>
-	  			<%= @topic.user.sex %>
+	  			<h3><%= @topic.user.sex %></h3>
 	  		<h3>スタイル</h3>
-	  			<%= @topic.user.style %>
+	  			<h3><%= @topic.user.style %></h3>
 	  		<h3>地域</h3>
-	  			<%= @topic.area %>
+	  			<h3><%= @topic.area %></h3>
 			<h3>タイトル</h3>
-				<%=@topic.title %>
+				<h3><%=@topic.title %></h3>
 	  		<h3>本文</h3>
+	  		<h3>
 	  		<p class="word"><%= @topic.comment %></p>
-	  		<button type="button" class="btn btn-success active"><%= link_to "参加",  topic_chats_path(@topic.id) %></button>
-	  		<%# if current_user.id == @topic.user.id %>
-	  		<%#= link_to "編集", edit_topic_path(@topic.id) %>
-  			<%# end %>
-  			<div class="">
+	  		</h3>
+	  		<!-- <button type="button" class="btn btn-success active"><%= link_to "参加",  topic_chats_path(@topic.id) %></button> -->
+	  	</div>
+	  	<%# if current_user.id == @topic.user.id %>
+	  	<%#= link_to "編集", edit_topic_path(@topic.id) %>
+  		<%# end %>
+	  	<div class="col-lg-8">
+	  		<div class="text-center">
+	  			<h2>
+  					<%= @topic.chats.count %>件コメント
+  				</h2>
   			</div>
+  			<% @topic.chats.reverse_order.each do |chat| %>
+  			<%= link_to chat.user.name, user_path(chat.user.id) %>
+  			<%= chat.created_at.strftime('%Y/%m/%d %H:%M') %>
+  			<%= chat.comment %><br>
+  			<% end %>
+  		</div>
+  		<%= form_for [@topic,@chat] do |f| %>
+	  		 	<div class="row">
+			        <div class="col-sm-10">
+			            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+			        </div>
+			        <div class="col-sm-2">
+			            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+			        </div>
+			    </div>
+		<% end %>
   			<!-- <div class="pull-right">
 	        <%= link_to '戻る', :back %>
 	    	</div> -->

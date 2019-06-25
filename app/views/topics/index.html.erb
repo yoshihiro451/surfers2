@@ -3,8 +3,8 @@
 		<div class="col-lg-8 col-lg-offset-2">
 			<h2>スレッド一覧</h2>
 			<p>スレッド検索</p>
-			<%= form_tag(topics_path,:method => 'get') do %>
-			  <%= select :area, options_for_select(Topic.areas),{} %>
+			<%= form_tag(topics_path, method: "get") do %>
+			 <%= select_tag :area, options_for_select(Topic.areas), :prompt => "地域選択" %>
 			  <%= submit_tag '検索' %>
 			<% end %>
 			<table class="table">
@@ -28,8 +28,7 @@
 						<td><%= link_to topic.user.name, user_path(topic.user.id) %></td>
 						<td><%= topic.created_at.strftime('%Y/%m/%d %H:%M') %></td>
 						<td><%= topic.title %></td>
-						<td><%#= topic.comment %>
-							<%= link_to_unless_current topic.comment, topic_path(topic) %>
+						<td><%= link_to_unless_current truncate(topic.comment), topic_path(topic) %>
 						</td>
 						<td><%= topic.user.sex %></td>
 						<td><%= topic.user.style %></td>
@@ -43,9 +42,6 @@
 				</tbody>
 				<% end %>
 			</table>
-			<!-- <div class="pull-right">
-	        <%= link_to '戻る', :back %>
-	    	</div> -->
 			<%= paginate @topics, class: "paginate" %>
 		</div>
 	</div>

@@ -28,7 +28,12 @@ class TopicsController < ApplicationController
 		# これいらんかも↓
 		#@topics = Topic.all
 		#@topic = Topic.find_by_id(params[:id])
-		@topics = Topic.page(params[:page]).reverse_order
+		# @topics = Topic.all.order(created_at: :desc)
+		# @topic = Topic.all.order(created_at: :desc)
+		@topics = Topic.all.reverse_order.page(params[:page])
+		if params[:area].present?
+			@topics = @topics.get_by_area params[:area]
+		end
 		# @topics = Topic.where
 	end
 
@@ -43,7 +48,10 @@ class TopicsController < ApplicationController
 	end
 
 	def show
-		 @topic = Topic.find_by_id(params[:id])
+		@topics = Topic.all.order(created_at: :desc)
+		@topic = Topic.find_by_id(params[:id])
+		@chat = Chat.new
+		# @topic.chats = Chat.reverse_order
 	end
 
 	def ensure_correct_user

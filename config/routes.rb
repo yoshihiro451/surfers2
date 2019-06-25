@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  devise_for :admin_users
   root to: "topics#index"
   get 'static_page/index'
   devise_for :users
   resources :topics do
-  	resources :chats
+  	resource :chats, only: [:create, :destroy]
   end
   resources :contacts
   resources :users
