@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-sm-4">
 			<% if current_user.try(:admin?) %>
 		      <div class="page-header">
 		        <h1>管理者マイページ</h1>
@@ -34,7 +34,7 @@
 			</table>
 			<% end %>
 		</div>
-		<div class="col-lg-8">
+		<div class="col-sm-8">
 			<h1>投稿スレッド一覧</h1>
 			<table class="table">
 			<% @topics.each do |topic| %>
