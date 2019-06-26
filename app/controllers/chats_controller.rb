@@ -7,14 +7,18 @@ class ChatsController < ApplicationController
 	# end
 	def create
 		# @chat = Chat.new
+		@topic = Topic.find(params[:topic_id])
 		@chat = Chat.new(chat_params)
-		@chat.topic_id = params[:topic_id]
+		@chat.topic_id = @topic.id
 		@chat.user_id = current_user.id
-		@chat.save!
-		# binding.pry
-		# @chats = Chat.all
-		# @topic = Topic.find(params[:topic_id])
-		redirect_to topic_path(params[:topic_id])
+		# @topic = Topic.find_by_id(params[:id]
+		# @topics = Topic.all.order(created_at: :desc)
+		if @chat.save
+			redirect_to topic_path(params[:topic_id])
+		else
+			@chats = Chat.all
+			render template: "topics/show"
+		end
 	end
 
 	def index

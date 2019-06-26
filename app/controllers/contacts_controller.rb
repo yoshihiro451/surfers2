@@ -17,6 +17,7 @@ class ContactsController < ApplicationController
 			NotificationMailer.send_confirm_to_user(@contact).deliver_now
 			redirect_to new_contact_path
 		else
+			@contacts = Contact.all.reverse_order.page(params[:page])
 			render :new
 		end
 	end

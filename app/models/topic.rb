@@ -14,6 +14,10 @@ class Topic < ApplicationRecord
    scope :get_by_area, ->(area) {
       where(area: area)
    }
+   # validates :title, presence: true
+   # validates :comment, presence: true
+   validates :title, length: { in: 1..200 }
+   validates :comment, length: { in: 1..500 }
    # default_scope -> { order(created_at: :desc) }
 
 end

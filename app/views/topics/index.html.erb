@@ -1,6 +1,24 @@
 <div class="container">
 	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2">
+		<div class="col-lg-4">
+			<h1>新規投稿</h1>
+			<%= form_for @topic do |f| %>
+				<% if @topic.errors.any? %>
+			        <%= @topic.errors.count %>件のエラーが発生しました
+			        <% @topic.errors.full_messages.each do |message| %>
+			            <%= message %>
+			        <% end %>
+			    <% end %>
+				<h4>タイトル</h4>
+				<%= f.text_field :title %>
+				<h4>コメント</h4>
+				<%= f.text_area :comment %>
+				<h4>地域</h4>
+				<%= f.select :area, options_for_select(Topic.areas),{} %>
+				<%= f.submit "投稿" %>
+			<% end %>
+		</div>
+		<div class="col-lg-8">
 			<h2>スレッド一覧</h2>
 			<p>スレッド検索</p>
 			<%= form_tag(topics_path, method: "get") do %>

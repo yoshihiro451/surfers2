@@ -18,9 +18,10 @@ class TopicsController < ApplicationController
 		@topic = Topic.new(params_int(topic_params))
 		@topic.user_id = current_user.id
 		if @topic.save
-			redirect_to "/topics/"
+			redirect_to topics_path
 		else
-			render :new
+			@topics = Topic.all.reverse_order.page(params[:page])
+			render :index
 		end
 	end
 
@@ -30,11 +31,11 @@ class TopicsController < ApplicationController
 		#@topic = Topic.find_by_id(params[:id])
 		# @topics = Topic.all.order(created_at: :desc)
 		# @topic = Topic.all.order(created_at: :desc)
+		@topic = Topic.new
 		@topics = Topic.all.reverse_order.page(params[:page])
 		if params[:area].present?
 			@topics = @topics.get_by_area params[:area]
 		end
-		# @topics = Topic.where
 	end
 
 	def edit
@@ -51,7 +52,6 @@ class TopicsController < ApplicationController
 		@topics = Topic.all.order(created_at: :desc)
 		@topic = Topic.find_by_id(params[:id])
 		@chat = Chat.new
-		# @topic.chats = Chat.reverse_order
 	end
 
 	def ensure_correct_user
