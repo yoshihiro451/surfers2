@@ -25,6 +25,7 @@
 			 <%= select_tag :area, options_for_select(Topic.areas), :prompt => "地域選択" %>
 			  <%= submit_tag '検索' %>
 			<% end %>
+                     <div class="table-responsive">
 			<table class="table">
 				<%#= @topic.user.name %>
 				<% @topics.each do |topic| %>
@@ -60,6 +61,7 @@
 				</tbody>
 				<% end %>
 			</table>
+		     </div>
 			<%= paginate @topics, class: "paginate" %>
 		</div>
 	</div>
